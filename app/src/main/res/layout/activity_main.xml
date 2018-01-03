@@ -1,18 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.kita.tandanziandroid.com.example.kita.tandanziandroid.MainActivity">
 
-    <TextView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="80sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="아이디" />
+
+        <EditText
+            android:id="@+id/id"
+            android:layout_width="200sp"
+            android:hint="영문+숫자 15자 이내"
+            android:textSize="12sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="80sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="비밀번호" />
+
+        <EditText
+            android:id="@+id/pw"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="영문+숫자 15자 이내"
+            android:textSize="12sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv3"
+            android:text="몸무게"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="80sp"
+            />
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="200sp"
+            android:inputType="textPassword"
+            android:hint="kg"
+            android:textSize="12sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnJoin"
+        android:layout_width="280sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="회원가입"
+        android:background="#fbfdc1"
+        android:onClick="join"
+        />
+
+
+</LinearLayout>
