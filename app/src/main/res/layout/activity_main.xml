@@ -67,7 +67,6 @@
         <EditText
             android:id="@+id/weight"
             android:layout_width="200sp"
-            android:inputType="textPassword"
             android:hint="kg"
             android:textSize="12sp"
             android:layout_height="wrap_content" />
