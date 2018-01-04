@@ -1,5 +1,6 @@
 package com.example.kita.tandanziandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -104,7 +105,10 @@ public class MainActivity extends AppCompatActivity {
             super.handleMessage(msg); // 이 안에 있는 데이터를 TextView 에 뿌려준다.
          //   Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
             if (msg.obj.toString().equals("success")) {
-                Toast.makeText(MainActivity.this, "가입성공", Toast.LENGTH_SHORT).show();
+             //   Intent intent = new Intent(this, LoginActivity.class);
+             //   intent.putExtra("성공", "가입 성공");
+            /*    setResult(RESULT_OK,intent);
+                finish();*/
             } else if (msg.obj.toString().equals("failed")) {
                 Toast.makeText(MainActivity.this, "다른 아이디를 사용해주세요", Toast.LENGTH_SHORT).show();
             }
