@@ -1,5 +1,6 @@
 package com.example.kita.tandanziandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,8 +17,8 @@ import java.net.URL;
 public class LoginActivity extends AppCompatActivity {
 
     EditText id, password;
-    String i,pw;
-
+    String idText,pwText;
+    static final int LOGIN_ACT = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,21 +28,31 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.pw);
     }
 
-    public void login(View view){
-        int btn = view.getId();
-        i=id.getText().toString().trim();
-        pw=password.getText().toString().trim();
-        if(i.length()==0 || pw.length() == 0){
-            Toast.makeText(this,"데이터를 입력해 주세요.",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        new LoginThread().start();
+    public void join(View view){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivityForResult(intent,LOGIN_ACT);
+    }
 
+
+    public void login(View view){
+        idText=id.getText().toString().trim();
+        pwText=password.getText().toString().trim();
+        if(idText.length()==0 || pwText.length() == 0){
+            Toast.makeText(this,"id와 pw를 입력하세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }else {
+            new LoginThread().start();
+            Intent intent = new Intent(this,LoggedActivity.class);
+            intent.putExtra("userId",idText);
+            intent.putExtra("userPw",pwText);
+            setResult(RESULT_OK,intent);
+            startActivity(intent);
+        }
 
 
     }
     class LoginThread extends Thread{
-        String addr = "http://10.10.8.20:8888/spring/login?id="+i+"&password="+pw;
+        String addr = "http://10.10.10.76:8888/tandanzi/login?id="+idText+"&pw="+pwText;
         public void run(){
             try {
                 URL url = new URL(addr);
@@ -87,8 +98,8 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             String message = (String)msg.obj;
-
-            if(message.equals("SUCCESS")){
+            Log.v("메시지값:",message);
+            if(message.equals("success")){
                 Toast.makeText(LoginActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(LoginActivity.this,"로그인 실패",Toast.LENGTH_SHORT).show();
@@ -96,4 +107,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if(requestCode == LOGIN_ACT){
+            if(resultCode == RESULT_OK){
+                String userId = intent.getStringExtra("id");
+                String userPw = intent.getStringExtra("pw");
+                Toast.makeText(this,userId,Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
 }
