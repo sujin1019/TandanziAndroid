@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class JoinThread extends Thread {
-        String addr = "http://10.10.10.141:9010/tandanzi/join";
-    //    String addr = "http://10.10.10.76:8888/tandanzi/join";
+        String addr = "http://10.10.8.22:9010/tandanzi/join";
 
         @Override
         public void run() {
@@ -106,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
             super.handleMessage(msg); // 이 안에 있는 데이터를 TextView 에 뿌려준다.
          //   Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
             if (msg.obj.toString().equals("success")) {
-/*                Intent intent = new Intent(this, LoginActivity.class);
-                intent.putExtra("성공", "가입 성공");
-                setResult(RESULT_OK,intent);
+             //   Intent intent = new Intent(this, LoginActivity.class);
+             //   intent.putExtra("성공", "가입 성공");
+            /*    setResult(RESULT_OK,intent);
                 finish();*/
             } else if (msg.obj.toString().equals("failed")) {
                 Toast.makeText(MainActivity.this, "다른 아이디를 사용해주세요", Toast.LENGTH_SHORT).show();
