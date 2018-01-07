@@ -53,8 +53,10 @@ public class LoggedActivity extends AppCompatActivity {
     }
 
     class SearchThread extends Thread {
+
         //String addr = "http://192.168.35.53:9010/tandanzi/search";
             String addr = "http://10.10.12.34:8888/tandanzi/search";
+
 
         @Override
         public void run() {

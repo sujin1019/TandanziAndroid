@@ -5,14 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -59,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class JoinThread extends Thread {
+
         String addr = "http://10.10.12.34:8888/tandanzi/join";
+
 
         @Override
         public void run() {
@@ -103,12 +100,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg); // 이 안에 있는 데이터를 TextView 에 뿌려준다.
-         //   Toast.makeText(MainActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
             if (msg.obj.toString().equals("success")) {
-             //   Intent intent = new Intent(this, LoginActivity.class);
-             //   intent.putExtra("성공", "가입 성공");
-            /*    setResult(RESULT_OK,intent);
-                finish();*/
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.putExtra("성공", "가입 성공");
+                setResult(RESULT_OK,intent);
+                finish();
             } else if (msg.obj.toString().equals("failed")) {
                 Toast.makeText(MainActivity.this, "다른 아이디를 사용해주세요", Toast.LENGTH_SHORT).show();
             }
