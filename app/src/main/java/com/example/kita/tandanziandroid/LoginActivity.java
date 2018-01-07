@@ -1,5 +1,6 @@
 package com.example.kita.tandanziandroid;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         id = (EditText) findViewById(R.id.id);
         password = (EditText) findViewById(R.id.pw);
     }
@@ -42,17 +42,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }else {
             new LoginThread().start();
-            Intent intent = new Intent(this,LoggedActivity.class);
-            intent.putExtra("userId",idText);
-            intent.putExtra("userPw",pwText);
-            setResult(RESULT_OK,intent);
-            startActivity(intent);
         }
 
 
     }
     class LoginThread extends Thread{
-        String addr = "http://10.10.10.76:8888/tandanzi/login?id="+idText+"&pw="+pwText;
+           String addr = "http://10.10.12.34:8888/tandanzi/login?id="+idText+"&pw="+pwText;
+       //String addr = "http://192.168.35.53:9010/tandanzi/login?id="+idText+"&pw="+pwText;
         public void run(){
             try {
                 URL url = new URL(addr);
@@ -65,9 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
                     InputStreamReader in = new InputStreamReader(conn.getInputStream());
-
                     int ch;
-
                     while((ch=in.read())!=-1){
                         sb.append((char)ch);
                     }
@@ -83,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     in.close();
                     conn.disconnect();
-
                 }
 
             }catch (Exception e){}
@@ -100,7 +93,12 @@ public class LoginActivity extends AppCompatActivity {
             String message = (String)msg.obj;
             Log.v("메시지값:",message);
             if(message.equals("success")){
-                Toast.makeText(LoginActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(LoginActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),LoggedActivity.class);
+                intent.putExtra("userId",idText);
+                intent.putExtra("userPw",pwText);
+                setResult(RESULT_OK,intent);
+                startActivity(intent);
             } else {
                 Toast.makeText(LoginActivity.this,"로그인 실패",Toast.LENGTH_SHORT).show();
             }
