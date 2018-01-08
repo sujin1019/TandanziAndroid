@@ -47,8 +47,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     class LoginThread extends Thread{
-     //   String addr = "http://10.10.10.76:8888/tandanzi/login?id="+idText+"&pw="+pwText;
-        String addr = "http://10.10.8.22:9010/tandanzi/login?id="+idText+"&pw="+pwText;
+
+           String addr = "http://10.10.12.34:8888/tandanzi/login?id="+idText+"&pw="+pwText;
+       //String addr = "http://192.168.35.53:9010/tandanzi/login?id="+idText+"&pw="+pwText;
+
         public void run(){
             try {
                 URL url = new URL(addr);
@@ -93,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
             String message = (String)msg.obj;
             Log.v("메시지값:",message);
             if(message.equals("success")){
-             //   Toast.makeText(LoginActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(),LoggedActivity.class);
                 intent.putExtra("userId",idText);
                 intent.putExtra("userPw",pwText);

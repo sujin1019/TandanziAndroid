@@ -10,16 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by charlotte on 2018-01-04.
- */
 
 public class LoggedActivity extends AppCompatActivity {
     EditText et;
@@ -56,8 +50,10 @@ public class LoggedActivity extends AppCompatActivity {
     }
 
     class SearchThread extends Thread {
-        String addr = "http://10.10.8.22:9010/tandanzi/search";
-        //    String addr = "http://10.10.10.76:8888/tandanzi/join";
+
+        //String addr = "http://192.168.35.53:9010/tandanzi/search";
+            String addr = "http://10.10.12.34:8888/tandanzi/search";
+
 
         @Override
         public void run() {
