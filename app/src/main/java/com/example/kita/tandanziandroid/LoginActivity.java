@@ -95,9 +95,6 @@ public class LoginActivity extends AppCompatActivity {
             String message = (String)msg.obj;
             Log.v("메시지값:",message);
             if(message.equals("success")){
-
-                //   Toast.makeText(LoginActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(getApplicationContext(),LoggedActivity.class);
                 intent.putExtra("userId",idText);
                 intent.putExtra("userPw",pwText);

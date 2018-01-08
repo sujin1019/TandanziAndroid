@@ -54,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class JoinThread extends Thread {
-
         String addr = "http://10.10.8.20:8888/tandanzi/join";
-
 
         @Override
         public void run() {

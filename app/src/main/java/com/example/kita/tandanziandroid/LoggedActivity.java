@@ -15,9 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * Created by charlotte on 2018-01-04.
- */
 
 public class LoggedActivity extends AppCompatActivity {
     EditText et;
@@ -39,7 +36,7 @@ public class LoggedActivity extends AppCompatActivity {
         int id = view.getId();
 
         word = et.getText().toString().trim();
-
+        et.setPrivateImeOptions("defaultInputmode=korean;");
         if (word.length() == 0) {
             Toast.makeText(this, "값을 입력하세요", Toast.LENGTH_SHORT).show();
             return;
@@ -167,19 +164,17 @@ public class LoggedActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg); // 이 안에 있는 데이터를 TextView 에 뿌려준다.
-            Toast.makeText(LoggedActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+   //         Toast.makeText(LoggedActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+            if(msg.obj.toString()==null){
+                Toast.makeText(LoggedActivity.this, "해당 음식이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }else {
+                Intent intent = new Intent(LoggedActivity.this, SearchResultActivity.class);
 
-/*
-            if (msg.obj.toString().equals("success")) {
-                Intent intent = new Intent(LoggedActivity.this, LoginActivity.class);
-                intent.putExtra("성공", "가입 성공");
+                intent.putExtra("contents", msg.obj.toString());
                 setResult(RESULT_OK, intent);
-                finish();
-            } else if (msg.obj.toString().equals("failed")) {
-                Toast.makeText(LoggedActivity.this, "다른 아이디를 사용해주세요", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
-*/
-
 
         }
     };
