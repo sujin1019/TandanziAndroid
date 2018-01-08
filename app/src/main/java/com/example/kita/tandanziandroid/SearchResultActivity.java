@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ public class SearchResultActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> listData;
     Intent intent;
+    ArrayList<ContentVO> arrayList;
+    ContentVO ct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,13 @@ public class SearchResultActivity extends AppCompatActivity {
                 JSONObject item = null; // 배열 각각의 아이템
 
                 jsonArray = new JSONArray(intent.getStringExtra("contents"));
+                arrayList = new ArrayList();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     item = jsonArray.getJSONObject(i);
                     listData.add(item.getString("name"));
+                    ct = new ContentVO(item.getInt("foodNum"), item.getString("name"), item.getDouble("eachkcal"), item.getDouble("eachCarbohy"), item.getDouble("eachProtein"), item.getDouble("eachFat"));
+                    arrayList.add(ct);
                 }
             } catch (Exception e) {
             }
@@ -59,9 +65,30 @@ public class SearchResultActivity extends AppCompatActivity {
             // ListView 에 set 하기
             listView = (ListView) findViewById(R.id.listView);
             listView.setAdapter(adapter);
-
+            listView.setOnItemClickListener(mItemClickListener);
         }// run()
     }// Thread()
+
+    private AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long l_position) {
+      //      String tv = (String)parent.getAdapter().getItem(position);
+            Intent intent = new Intent(SearchResultActivity.this, SearchActivity.class);
+            Double cal = arrayList.get(position).getEachkcal();
+            Double car = arrayList.get(position).getEachCarbohy();
+            Double pro = arrayList.get(position).getEachProtein();
+            Double fat = arrayList.get(position).getEachFat();
+
+            intent.putExtra("name", arrayList.get(position).getName().toString());
+            intent.putExtra("cal", cal.toString());
+            intent.putExtra("car", car.toString());
+            intent.putExtra("pro", pro.toString());
+            intent.putExtra("fat", fat.toString());
+            setResult(RESULT_OK,intent);
+            startActivity(intent);
+        }
+    };
+
 
     class MyAdapter extends BaseAdapter {
 

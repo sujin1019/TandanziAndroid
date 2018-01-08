@@ -86,7 +86,7 @@ public class LoggedActivity extends AppCompatActivity {
     class SearchThread extends Thread {
 
         //String addr = "http://192.168.35.53:9010/tandanzi/search";
-            String addr = "http://10.10.8.20:8888/tandanzi/search";
+            String addr = "http://192.168.35.53:9010/tandanzi/search";
 
 
         @Override
@@ -128,7 +128,7 @@ public class LoggedActivity extends AppCompatActivity {
     }
 
     class GetListThread extends Thread{
-        String addr = "http://10.10.8.20:8888/tandanzi/getFoodList?slType="+slType;
+        String addr = "http://192.168.35.53:9010/tandanzi/getFoodList?slType="+slType;
         public void run(){
             try {
                 URL url = new URL(addr);

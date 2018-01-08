@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     class LoginThread extends Thread{
 
-           String addr = "http://10.10.8.20:8888/tandanzi/login?id="+idText+"&pw="+pwText;
+           String addr = "http://192.168.35.53:9010/tandanzi/login?id="+idText+"&pw="+pwText;
        //String addr = "http://192.168.35.53:9010/tandanzi/login?id="+idText+"&pw="+pwText;
 
         public void run(){
