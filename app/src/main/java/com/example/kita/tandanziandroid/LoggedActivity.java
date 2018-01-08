@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,7 +40,7 @@ public class LoggedActivity extends AppCompatActivity {
         int id = view.getId();
 
         word = et.getText().toString().trim();
-
+        et.setPrivateImeOptions("defaultInputmode=korean;");
         if (word.length() == 0) {
             Toast.makeText(this, "값을 입력하세요", Toast.LENGTH_SHORT).show();
             return;
@@ -53,7 +56,7 @@ public class LoggedActivity extends AppCompatActivity {
     }
 
     class SearchThread extends Thread {
-        String addr = "http://192.168.35.53:9010/tandanzi/search";
+        String addr = "http://10.10.8.22:9010/tandanzi/search";
         //    String addr = "http://10.10.10.76:8888/tandanzi/join";
 
         @Override
@@ -98,19 +101,17 @@ public class LoggedActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg); // 이 안에 있는 데이터를 TextView 에 뿌려준다.
-            Toast.makeText(LoggedActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+   //         Toast.makeText(LoggedActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+            if(msg.obj.toString()==null){
+                Toast.makeText(LoggedActivity.this, "해당 음식이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }else {
+                Intent intent = new Intent(LoggedActivity.this, SearchResultActivity.class);
 
-/*
-            if (msg.obj.toString().equals("success")) {
-                Intent intent = new Intent(LoggedActivity.this, LoginActivity.class);
-                intent.putExtra("성공", "가입 성공");
+                intent.putExtra("contents", msg.obj.toString());
                 setResult(RESULT_OK, intent);
-                finish();
-            } else if (msg.obj.toString().equals("failed")) {
-                Toast.makeText(LoggedActivity.this, "다른 아이디를 사용해주세요", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
-*/
-
 
         }
     };
