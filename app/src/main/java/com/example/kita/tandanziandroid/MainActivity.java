@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     class JoinThread extends Thread {
 
-        String addr = "http://10.10.12.34:8888/tandanzi/join";
+        String addr = "http://10.10.8.20:8888/tandanzi/join";
 
 
         @Override

@@ -30,5 +30,76 @@
             />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/btnKorea"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:text="한식"
+            android:textSize="20sp"
+            android:onClick="getFoodList"
+            />
+        <Button
+            android:id="@+id/btnChina"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:text="중식"
+            android:textSize="20sp"
+            android:onClick="getFoodList"
+            />
+        <Button
+            android:id="@+id/btnJapan"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:text="일식"
+            android:textSize="20sp"
+            android:onClick="getFoodList"
+            />
 
+    </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:id="@+id/btnWestern"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:text="양식"
+                android:textSize="20sp"
+                android:onClick="getFoodList"
+                />
+            <Button
+                android:id="@+id/btnDrink"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:text="음료"
+                android:textSize="20sp"
+                android:onClick="getFoodList"
+                />
+            <Button
+                android:id="@+id/btnDessert"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:text="디저트"
+                android:textSize="20sp"
+                android:onClick="getFoodList"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>
