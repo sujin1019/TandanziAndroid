@@ -13,7 +13,6 @@ import android.widget.Toast;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 
 public class LoggedActivity extends AppCompatActivity {
@@ -56,37 +55,32 @@ public class LoggedActivity extends AppCompatActivity {
         int id = view.getId();
         switch (id){
             case R.id.btnKorea:
-                slType="한식";
+                slType="kor";
                 break;
             case R.id.btnJapan:
-                slType="일식";
+                slType="jap";
                 break;
             case R.id.btnChina:
-                slType="중식";
+                slType="chi";
                 break;
             case R.id.btnWestern:
-                slType="양식";
+                slType="west";
                 break;
             case R.id.btnDrink:
-                slType="음료";
+                slType="drinks";
                 break;
             case R.id.btnDessert:
-                slType="디저트";
+                slType="sweets";
                 break;
         }
         LoggedActivity.GetListThread GetListThread = new LoggedActivity.GetListThread();
         GetListThread.start();
-
-
-
-
-
     }
 
     class SearchThread extends Thread {
 
         //String addr = "http://192.168.35.53:9010/tandanzi/search";
-            String addr = "http://192.168.35.53:9010/tandanzi/search";
+            String addr = "http://10.10.8.22:9010/tandanzi/search";
 
 
         @Override
@@ -128,7 +122,7 @@ public class LoggedActivity extends AppCompatActivity {
     }
 
     class GetListThread extends Thread{
-        String addr = "http://192.168.35.53:9010/tandanzi/getFoodList?slType="+slType;
+        String addr = "http://10.10.8.22:9010/tandanzi/getFoodList?slType="+slType;
         public void run(){
             try {
                 URL url = new URL(addr);
@@ -182,14 +176,14 @@ public class LoggedActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            String message = (String)msg.obj;
+            String message = msg.obj.toString();
             Log.v("메시지값handler2:",message);
-                foodList = message;
-                Intent intent = new Intent(getApplicationContext(),ListActivity.class);
-                intent.putExtra("userList",foodList);
-                setResult(RESULT_OK,intent);
-                Log.v("intent값:",message);
-                startActivity(intent);
+            foodList = message;
+            Intent intent = new Intent(getApplicationContext(),ListActivity.class);
+            intent.putExtra("userList",foodList);
+            setResult(RESULT_OK,intent);
+            Log.v("intent값:",message);
+            startActivity(intent);
 
         }
     };
